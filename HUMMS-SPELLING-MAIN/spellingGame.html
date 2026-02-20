@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css">
+    <link rel="stylesheet" href="spellingGame.css">
+    <title>Spill-it</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="top-icons" id="topIcons">
+            <button class="icon-btn" id="guideBtn" title="How to Play">❓</button>
+            <button class="icon-btn" id="settingsBtn" title="Settings">⚙️</button>
+        </div>
+
+        <div id="menuScreen" class="screen active">
+            <div class="menu-screen">
+                <h1 class="game-title">Spill-it</h1>
+                <p class="subtitle">Grade 12 HUMSS · Academic Vocabulary Game</p>
+
+                <div class="difficulty-label">Choose a Difficulty</div>
+                <div class="difficulty-buttons">
+                    <button class="difficulty-btn" data-difficulty="easy">
+                        Easy
+                        <span class="diff-count">20 Questions</span>
+                    </button>
+                    <button class="difficulty-btn" data-difficulty="normal">
+                        Normal
+                        <span class="diff-count">20 Questions</span>
+                    </button>
+                    <button class="difficulty-btn" data-difficulty="hard">
+                        Hard
+                        <span class="diff-count">20 Questions</span>
+                    </button>
+                </div>
+
+                <button id="playBtn" class="play-btn" disabled>▶ Start Game</button>
+            </div>
+        </div>
+
+        <div id="gameScreen" class="screen">
+            <div class="game-header">
+                <div class="game-info">
+                    <div class="badge badge-timer" id="timerBadge">⏱ <span id="timeLeft">15</span>s</div>
+                    <div class="badge badge-score">⭐ <span id="scoreDisplay">0</span> pts</div>
+                </div>
+                <button id="pauseBtn" class="pause-btn">⏸ Pause</button>
+            </div>
+
+            <div class="level-bar">
+                <span class="level-text">Question <span id="currentLevel">1</span> of <span
+                        id="totalLevels">20</span></span>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="def-tag">Definition / Clue</div>
+                <div class="definition-text" id="definitionText">Loading…</div>
+            </div>
+
+            <div class="choices-grid" id="choicesGrid"></div>
+
+            <div class="hints-row">
+                <span class="hints-label">Hints:</span>
+                <div class="hint-dots" id="hintDots">
+                    <div class="hint-dot"></div>
+                    <div class="hint-dot"></div>
+                    <div class="hint-dot"></div>
+                </div>
+                <button id="hintBtn" class="hint-btn">💡 Use Hint</button>
+            </div>
+        </div>
+
+        <div id="resultScreen" class="screen">
+            <div class="result-screen">
+                <h2 class="result-title">Game Complete!</h2>
+                <div class="result-grid">
+                    <div class="result-card">
+                        <div class="result-card-label">Final Score</div>
+                        <div class="result-card-value" id="finalScore">0</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-card-label">Accuracy</div>
+                        <div class="result-card-value" id="accuracy">0%</div>
+                    </div>
+                </div>
+                <div id="resultMessage" class="result-message"></div>
+                <button id="playAgainBtn" class="play-again-btn">↩ Play Again</button>
+            </div>
+        </div>
+
+        <div id="settingsScreen" class="screen">
+            <h2 class="section-title">⚙️ Settings</h2>
+
+            <div class="settings-group">
+                <div class="settings-group-title">Game Options</div>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Timer Duration</div>
+                        <div class="setting-sub">Seconds allowed per question</div>
+                    </div>
+                    <select class="styled-select" id="timerDuration">
+                        <option value="10">10 s</option>
+                        <option value="15" selected>15 s</option>
+                        <option value="20">20 s</option>
+                        <option value="30">30 s</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Auto-Continue</div>
+                        <div class="setting-sub">Move to next question automatically</div>
+                    </div>
+                    <div class="toggle on" id="autoContinueToggle">
+                        <div class="toggle-knob"></div>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Animations</div>
+                        <div class="setting-sub">Enable transition effects</div>
+                    </div>
+                    <div class="toggle on" id="animationsToggle">
+                        <div class="toggle-knob"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <div class="settings-group-title">Display</div>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Font Size</div>
+                        <div class="setting-sub">Adjust text size for readability</div>
+                    </div>
+                    <select class="styled-select" id="fontSize">
+                        <option value="small">Small</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="back-btn" id="backFromSettings">← Back to Menu</button>
+        </div>
+
+        <div id="guideScreen" class="screen">
+            <h2 class="section-title">How to Play</h2>
+
+            <div class="guide-section">
+                <div class="guide-section-title">🎮 Overview</div>
+                <div class="guide-content">
+                    <p><strong>Spelling Mastery</strong> tests your mastery of academic vocabulary used in HUMSS
+                        subjects. A definition or clue is shown — choose the <strong>correctly spelled word</strong>
+                        from three options before the timer runs out!</p>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">📊 Difficulty Levels</div>
+                <div class="guide-content">
+                    <ul>
+                        <li><strong>Easy:</strong> 20 foundational HUMSS terms and general knowledge (e.g., Equality,
+                            Psychology, History)</li>
+                        <li><strong>Normal:</strong> 20 intermediate vocabulary including philosophy, social science,
+                            and history (e.g., Epistemology, Onomatopoeia, Hypocrisy)</li>
+                        <li><strong>Hard:</strong> 20 advanced academic terms requiring deeper knowledge (e.g.,
+                            Bureaucracy, Denouement, Conscientious)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">⚡ Gameplay Steps</div>
+                <div class="guide-content">
+                    <ul>
+                        <li><strong>1.</strong> Choose your difficulty and press <strong>Start Game</strong></li>
+                        <li><strong>2.</strong> Read the definition or clue carefully</li>
+                        <li><strong>3.</strong> Click the option with the <strong>correct spelling</strong> (A, B, or C)
+                        </li>
+                        <li><strong>4.</strong> Answer before the timer hits zero!</li>
+                        <li><strong>5.</strong> Use hints wisely to eliminate a wrong choice</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">🎯 Scoring & Ratings</div>
+                <div class="guide-content">
+                    <ul>
+                        <li>✅ Correct answer → <strong>+10 points</strong></li>
+                        <li>❌ Wrong or timed out → <strong>0 points</strong></li>
+                    </ul>
+                    <br>
+                    <ul>
+                        <li><strong>90%+ accuracy</strong> → Excellent!</li>
+                        <li><strong>70–89% accuracy</strong> → Good Job!</li>
+                        <li><strong>Below 70%</strong> → Needs Improvement</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">💡 Hints</div>
+                <div class="guide-content">
+                    <p>You get <strong>3 hints per game</strong>. Each hint eliminates one wrong choice. The eliminated
+                        option fades out so you can focus on the remaining answers. Use them on the toughest questions!
+                    </p>
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <div class="guide-section-title">⏸ Pausing</div>
+                <div class="guide-content">
+                    <p>Click the <strong>Pause</strong> button during gameplay to take a break. The timer will stop
+                        while paused. Press <strong>Resume</strong> to continue or <strong>Quit to Menu</strong> to exit
+                        the current game.</p>
+                </div>
+            </div>
+
+            <button class="back-btn" id="backFromGuide">← Back to Menu</button>
+        </div>
+
+    </div>
+    <div id="pauseOverlay" class="pause-overlay">
+        <div class="pause-box">
+            <h2>Game Paused ⏸</h2>
+            <br>
+            <button id="resumeBtn" class="resume-btn">▶ Resume</button>
+            <button id="quitBtn" class="quit-btn">Quit to Menu</button>
+        </div>
+    </div>
+
+
+    <script src="spellingGame.js"></script>
+</body>
+
+</html>
