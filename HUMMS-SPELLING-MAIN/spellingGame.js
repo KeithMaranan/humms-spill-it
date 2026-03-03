@@ -3,8 +3,8 @@ const questionBank = {
     easy: [
         {
             definition: "It refers to fair and equal treatment of all people regardless of gender, race, or status.",
-            correct: "equality",
-            wrong: ["eiquality", "equaliety"]
+            correct: "Equality",
+            wrong: ["Eiquality", "Equaliety"]
         },
         {
             definition: "A student is not allowed to join an activity because of their religion. What social issue is shown?",
@@ -18,8 +18,8 @@ const questionBank = {
         },
         {
             definition: "What is the range of actions of organisms, individuals, systems or artificial entities in some environment?",
-            correct: "behavior",
-            wrong: ["behaviour", "behaevior"]
+            correct: "Behavior",
+            wrong: ["Behaviour", "Behaevior"]
         },
         {
             definition: "Who wrote the novel Noli Me Tangere?",
@@ -121,8 +121,8 @@ const questionBank = {
         },
         {
             definition: "The movement of people from one country to another to live or work.",
-            correct: "migration",
-            wrong: ["Immigration", "imigraition"]
+            correct: "Migration",
+            wrong: ["Immigration", "Imigraition"]
         },
         {
             definition: "A literary device where a word imitates the sound it represents.",
@@ -132,7 +132,7 @@ const questionBank = {
         {
             definition: "The conformity to the law or rules.",
             correct: "Legitimacy",
-            wrong: ["Legitmacy", "ligetmacy"]
+            wrong: ["Legitmacy", "Ligetmacy"]
         },
         {
             definition: "It is the theory of knowledge.",
@@ -235,7 +235,7 @@ const questionBank = {
         {
             definition: "It is the final part of a narrative.",
             correct: "Denouement",
-            wrong: ["Denoument", "denoment"]
+            wrong: ["Denoument", "Denoment"]
         },
         {
             definition: "It is a system of ranking.",
@@ -533,4 +533,5 @@ $('fontSize').addEventListener('change', e => {
         if (id === 'autoContinueToggle') state.settings.autoContinue = this.classList.contains('on');
         if (id === 'animationsToggle') state.settings.animations = this.classList.contains('on');
     });
+
 });
